@@ -2,8 +2,8 @@
 from logbook import Logger
 import time
 
-engine_logger = Logger('engine')
-data_logger = Logger('data')
+elogger = Logger('engine')
+dlogger = Logger('data')
 
 def time2int(t):
      """ datetime转化为整数。
@@ -23,19 +23,23 @@ def pcontract(contract, period):
        :return: 周期合约
        :rtype: PContract
     """
-    from quantdigger.kernel.datastruct import PContract, Contract, Period
+    from quantdigger.datastruct import PContract, Contract, Period
     return PContract(Contract(contract),
                      Period(period))
 
-def stock(code):
+def stock(code,period='1.Day'):
     """ 构建周期合约结构的便捷方式。
     
-    Args:
-        code (str): 股票代码
-    
-    Returns:
-        PContract. 周期合约
+       :param str code: 股票代码。
+       :param str period: 回测周期。
+       :return: 周期合约。
+       :rtype: PContract
     """
-    from quantdigger.kernel.datastruct import PContract, Contract, Period
+    from quantdigger.datastruct import PContract, Contract, Period
     return PContract(Contract('%s.stock' %  code),
-                     Period('1.Day'))
+                     Period(period))
+
+def formatTimeTicks():
+    """ 格式化时间显示""" 
+    pass
+
